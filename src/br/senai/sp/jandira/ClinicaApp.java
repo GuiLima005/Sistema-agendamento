@@ -46,6 +46,9 @@ public class ClinicaApp {
 		plano2.setOperadora("Bradesco");
 		plano2.seTipoDoPlano("Ouro");
 		
+		PlanoDeSaude plano3 = new PlanoDeSaude("Amil");
+		plano3.seTipoDoPlano("Prata");
+		
 		//Endereço
 		Endereco endereco1 = new Endereco();
 		endereco1.setLogradouro("Rua Elton Silva");
