@@ -10,14 +10,14 @@ public class PlanoDeSaudeDAO { // Simular nosso banco de dados
 	private static ArrayList<PlanoDeSaude> planos = new ArrayList<>();
 	
 	public PlanoDeSaudeDAO(PlanoDeSaude planoDeSaude) { 
-		this.planoDeSaude = planoDeSaude;
+		this.planos.add(planoDeSaude);
 	}
 	
 	public PlanoDeSaudeDAO() {
 		
 	}
 	
-	public void gravar(PlanoDeSaude planoDeSaude) {
+	public static void gravar(PlanoDeSaude planoDeSaude) {
 		planos.add(planoDeSaude);
 	}
 	

@@ -2,24 +2,38 @@ package br.senai.sp.jandira.model;
 
 public class PlanoDeSaude {
 
+	private static int contador = 100;
+	private Integer codigo;
 	private String operadora;
 	private String tipoDoPlano;
 	
 	//Construtores da classe
 	public PlanoDeSaude(String operadora) {
 		this.operadora = operadora;
+		atualizarCodigo();
 	}
 	
 	public PlanoDeSaude(String operado, String tipoDoPlano) {
 		this.operadora = operado;
 		this.tipoDoPlano = tipoDoPlano;
+		atualizarCodigo();
 	}
 	
 	public PlanoDeSaude() {
-		
+		atualizarCodigo();
 	}
 	
+	private void atualizarCodigo() {
+		this.codigo = contador;
+		contador++;
+	}
+	
+	
 	//Métodos de acesso
+	public Integer getCodigo() {
+		return codigo;
+	}
+	
 	public void setOperadora(String operadora) {
 		this.operadora = operadora;
 	}
@@ -39,6 +53,12 @@ public class PlanoDeSaude {
 	public String getDadosDoPlano() {
 		return "Plano: " + this.operadora + ", " + this.tipoDoPlano;
 	}
+	
+	public static int getContador() {
+		return contador;
+	}
+	
+	
 
 	
 }
