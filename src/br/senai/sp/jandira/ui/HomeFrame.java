@@ -1,11 +1,15 @@
 package br.senai.sp.jandira.ui;
 
+import br.senai.sp.jandira.dao.PlanoDeSaudeDAO;
+import javax.swing.JTable;
 
 public class HomeFrame extends javax.swing.JFrame {
 
-    
     public HomeFrame() {
         initComponents();
+        PlanoDeSaudeDAO.criarPlanosDeSaudeTeste();
+        criarTabelaPlanosDeSaude();
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -30,6 +34,7 @@ public class HomeFrame extends javax.swing.JFrame {
         buttonEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -207,4 +212,25 @@ public class HomeFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane scrollPlanoDeSaude;
     private javax.swing.JTable tablePlanosDeSaude;
     // End of variables declaration//GEN-END:variables
+
+    private void criarTabelaPlanosDeSaude() {
+        
+       tablePlanosDeSaude.setModel(PlanoDeSaudeDAO.getTableModel());
+        
+       // Desativar o redimendionamento do JTable
+       tablePlanosDeSaude.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+       
+       // Definir a largura de cada coluna
+        tablePlanosDeSaude.getColumnModel().getColumn(0).setPreferredWidth(150);
+        tablePlanosDeSaude.getColumnModel().getColumn(1).setPreferredWidth(350);
+        tablePlanosDeSaude.getColumnModel().getColumn(2).setPreferredWidth(350);
+        
+       // Impedir/Bloquear a movimentação da colunas
+       tablePlanosDeSaude.getTableHeader().setReorderingAllowed(false);
+       
+       // Bloquear edição das células
+       tablePlanosDeSaude.setDefaultEditor(Object.class, null);
+    
+    }
+    
 }
