@@ -2,90 +2,87 @@ package br.senai.sp.jandira.model;
 
 public class Paciente {
 
-	private String nome;
-	private String email;
-	private String cpf;
-	private String rg;
-	private String telefone;
-	private Genero genero;
-	private String tipoSanguineo;
-	private PlanoDeSaude planoDeSaude;
-	private Endereco endereco;
-	
-	//Métodos de acesso
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	
-	public String getNome() {
-		return nome;
-	}
+    private String nome;
+    private String email;
+    private String cpf;
+    private String rg;
+    private String telefone;
+    private Genero genero;
+    private String tipoSanguineo;
+    private PlanoDeSaude planoDeSaude;
+    private Endereco endereco;
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	public String getEmail() {
-		return email;
-	}
+    //Métodos de acesso
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public void setPlanoDeSaude(PlanoDeSaude planoDeSaude) {
-		this.planoDeSaude = planoDeSaude;
-	}
-	
-	public PlanoDeSaude getPlanoDeSaude() {
-		return planoDeSaude;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-	
-	public String getCpf() {
-		return cpf;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getRg() {
-		return rg;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setRg(String rg) {
-		this.rg = rg;
-	}
+    public void setPlanoDeSaude(PlanoDeSaude planoDeSaude) {
+        this.planoDeSaude = planoDeSaude;
+    }
 
-	public String getTelefone() {
-		return telefone;
-	}
+    public PlanoDeSaude getPlanoDeSaude() {
+        return planoDeSaude;
+    }
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 
-	public Genero getGenero() {
-		return genero;
-	}
+    public String getCpf() {
+        return cpf;
+    }
 
-	public void setGenero(Genero genero) {
-		this.genero = genero;
-	}
+    public String getRg() {
+        return rg;
+    }
 
-	public String getTipoSanguineo() {
-		return tipoSanguineo;
-	}
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
 
-	public void setTipoSanguineo(String tipoSanguineo) {
-		this.tipoSanguineo = tipoSanguineo;
-	}
-	
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-	
-	public Endereco getEndereco() {
-		return endereco;
-	}
+    public String getTelefone() {
+        return telefone;
+    }
 
-	
-	
-	
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public Genero getGenero() {
+        return genero;
+    }
+
+    public void setGenero(Genero genero) {
+        this.genero = genero;
+    }
+
+    public String getTipoSanguineo() {
+        return tipoSanguineo;
+    }
+
+    public void setTipoSanguineo(String tipoSanguineo) {
+        this.tipoSanguineo = tipoSanguineo;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
 }

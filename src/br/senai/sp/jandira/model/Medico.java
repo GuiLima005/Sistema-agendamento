@@ -4,51 +4,51 @@ import java.time.LocalDate;
 
 public class Medico {
 
-	private String nome;
-	private LocalDate dataDeNascimento;
-	private String sexo;
-	private String crm;
-	private Especialidade[] especialidades;
+    private String nome;
+    private LocalDate dataDeNascimento;
+    private String sexo;
+    private String crm;
+    private Especialidade[] especialidades;
 
-	// Métodos de acesso
-	public String getNome() {
-		return nome;
-	}
+    // Métodos de acesso
+    public String getNome() {
+        return nome;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public LocalDate getDataDeNascimento() {
-		return dataDeNascimento;
-	}
+    public LocalDate getDataDeNascimento() {
+        return dataDeNascimento;
+    }
 
-	public void setDataDeNascimento(LocalDate dataDeNascimento) {
-		this.dataDeNascimento = dataDeNascimento;
-	}
+    public void setDataDeNascimento(LocalDate dataDeNascimento) {
+        this.dataDeNascimento = dataDeNascimento;
+    }
 
-	public Especialidade[] getEspecialidades() {
-		return especialidades;
-	}
+    public Especialidade[] getEspecialidades() {
+        return especialidades;
+    }
 
-	public void setEspecialidades(Especialidade[] especialidades) {
-		this.especialidades = especialidades;
-	}
+    public void setEspecialidades(Especialidade[] especialidades) {
+        this.especialidades = especialidades;
+    }
 
-	public String getSexo() {
-		return sexo;
-	}
+    public String getSexo() {
+        return sexo;
+    }
 
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
-	}
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
 
-	public String getCrm() {
-		return crm;
-	}
+    public String getCrm() {
+        return crm;
+    }
 
-	public void setCrm(String crm) {
-		this.crm = crm;
-	}
+    public void setCrm(String crm) {
+        this.crm = crm;
+    }
 
 }
