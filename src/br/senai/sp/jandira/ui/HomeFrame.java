@@ -139,6 +139,7 @@ public class HomeFrame extends javax.swing.JFrame {
         jLabel3.setBounds(40, 30, 210, 50);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 51, 255));
         jLabel4.setText("Dados para contato:");
         panelHome.add(jLabel4);
         jLabel4.setBounds(750, 170, 180, 20);

@@ -1,6 +1,7 @@
 package br.senai.sp.jandira.ui;
 
 import br.senai.sp.jandira.dao.PlanoDeSaudeDAO;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 public class PlanosDeSaudePanel extends javax.swing.JPanel {
@@ -50,6 +51,11 @@ public class PlanosDeSaudePanel extends javax.swing.JPanel {
         buttonDeletar.setBackground(new java.awt.Color(246, 246, 246));
         buttonDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/deletar48.png"))); // NOI18N
         buttonDeletar.setToolTipText("Excluir Plano de Saúde selecionado");
+        buttonDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDeletarActionPerformed(evt);
+            }
+        });
         add(buttonDeletar);
         buttonDeletar.setBounds(680, 300, 70, 60);
 
@@ -75,7 +81,28 @@ public class PlanosDeSaudePanel extends javax.swing.JPanel {
         PlanosDeSaudeDialog planosDeSaudeDialog = new PlanosDeSaudeDialog(null, true);
         planosDeSaudeDialog.setVisible(true);
         
+        criarTabelaPlanosDeSaude();
+        
     }//GEN-LAST:event_buttonAdicionarActionPerformed
+
+    private void buttonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeletarActionPerformed
+        
+        int resposta = JOptionPane.showConfirmDialog(this, "Você confirma a exclusão do plano de saúde selecionado?", "Plano de Saúde", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        
+        int linha = tablePlanosDeSaude.getSelectedRow();
+        
+        if (linha != -1) {
+            //Excluir o plano
+            String codigoStr = tablePlanosDeSaude.getValueAt(linha, 0).toString();
+            Integer codigo = Integer.valueOf(codigoStr);
+            PlanoDeSaudeDAO.excluir(codigo);
+            criarTabelaPlanosDeSaude(); 
+            
+        }else{
+            JOptionPane.showMessageDialog(this, "Por favor, selecione o plano que você deseja excluir!", "Plano de Saúde", JOptionPane.ERROR_MESSAGE);
+        }
+                
+    }//GEN-LAST:event_buttonDeletarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
