@@ -108,7 +108,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonEditar">
+    <Component class="javax.swing.JButton" name="buttonAlterar">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="f6" green="f6" red="f6" type="rgb"/>
@@ -116,8 +116,11 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/br/senai/sp/jandira/imagens/editar48.png"/>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Editar Plano de Sa&#xfa;de selecionado"/>
+        <Property name="toolTipText" type="java.lang.String" value="Alterar Plano de Sa&#xfa;de selecionado"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAlterarActionPerformed"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="770" y="300" width="70" height="60"/>

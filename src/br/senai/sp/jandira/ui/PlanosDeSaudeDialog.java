@@ -2,13 +2,31 @@ package br.senai.sp.jandira.ui;
 
 import br.senai.sp.jandira.dao.PlanoDeSaudeDAO;
 import br.senai.sp.jandira.model.PlanoDeSaude;
+import br.senai.sp.jandira.model.TipoOperacao;
 import javax.swing.JOptionPane;
 
 public class PlanosDeSaudeDialog extends javax.swing.JDialog {
 
-    public PlanosDeSaudeDialog(java.awt.Frame parent, boolean modal) {
+    private TipoOperacao tipoOperacao;
+    private PlanoDeSaude planoDeSaude;
+
+    public PlanosDeSaudeDialog(java.awt.Frame parent, boolean modal, TipoOperacao tipoOperacao, PlanoDeSaude planoDeSaude) {
         super(parent, modal);
         initComponents();
+        this.tipoOperacao = tipoOperacao;
+        this.planoDeSaude = planoDeSaude;
+
+        // Preencher os campos, caso o tipo de operação for ALTERAR
+        if (tipoOperacao == TipoOperacao.ALTERAR) {
+            preencherFormulario();
+        }
+    }
+
+    private void preencherFormulario() {
+        labelTitulo.setText("Plano de Saúde - " + tipoOperacao);
+        textCodigo.setText(planoDeSaude.getCodigo().toString());
+        textNomeDaOperadora.setText(planoDeSaude.getOperadora());
+        textTipoDoPlano.setText(planoDeSaude.getTipoDoPlano());
     }
 
     @SuppressWarnings("unchecked")
@@ -18,7 +36,7 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        labelTitulo = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -65,9 +83,9 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
         jPanel2.setBackground(new java.awt.Color(246, 246, 246));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
-        jLabel2.setText("Planos de Saúde - Adicionar");
+        labelTitulo.setBackground(new java.awt.Color(255, 255, 255));
+        labelTitulo.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
+        labelTitulo.setText("Planos de Saúde - Adicionar");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/hospital48.png"))); // NOI18N
 
@@ -79,7 +97,7 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
                 .addGap(46, 46, 46)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(labelTitulo)
                 .addContainerGap(482, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -91,7 +109,7 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addComponent(jLabel2)))
+                        .addComponent(labelTitulo)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -158,11 +176,31 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
-        
-                
+
+
     }//GEN-LAST:event_buttonCancelarActionPerformed
 
     private void buttonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarActionPerformed
+
+        if (tipoOperacao == TipoOperacao.ADICIONAR) {
+            gravar();
+        } else {
+            atualizar();
+        }
+
+
+    }//GEN-LAST:event_buttonAdicionarActionPerformed
+
+    private void atualizar() {
+        planoDeSaude.setOperadora(textNomeDaOperadora.getText());
+        planoDeSaude.seTipoDoPlano(textTipoDoPlano.getText());
+        PlanoDeSaudeDAO.atualizar(planoDeSaude);
+        JOptionPane.showMessageDialog(this, "Plano de Saúde atualizado com sucesso!", "Plano de Saúde", JOptionPane.INFORMATION_MESSAGE);
+        dispose();
+    }
+
+    private void gravar() {
+
         //Criar um objeto Plano de Saúde
         PlanoDeSaude planoDeSaude = new PlanoDeSaude();
         planoDeSaude.setOperadora(textNomeDaOperadora.getText());
@@ -170,51 +208,33 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
 
         if (validarCadastro()) {
             PlanoDeSaudeDAO.gravar(planoDeSaude);
-            JOptionPane.showMessageDialog(this, "Plano de Saúde gravado com sucesso", "Plano de Saúde", JOptionPane.INFORMATION_MESSAGE);
+
+            JOptionPane.showMessageDialog(this, "Plano de Saúde gravado com sucesso!", "Plano de Saúde", JOptionPane.INFORMATION_MESSAGE);
             dispose();
         }
-
-    }//GEN-LAST:event_buttonAdicionarActionPerformed
+    }
 
     private boolean validarCadastro() {
         if (textNomeDaOperadora.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor preencha o nome da operadora", "Plano de Saúde", JOptionPane.ERROR_MESSAGE);
-            
+
             textNomeDaOperadora.requestFocus();
-            
+
             return false;
         }
         if (textTipoDoPlano.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor preecha o tipo do plano", "Aviso", JOptionPane.ERROR_MESSAGE);
-            
+
             textTipoDoPlano.requestFocus();
 
             return false;
         }
         return true;
     }
-
-    public static void main(String args[]) {
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                PlanosDeSaudeDialog dialog = new PlanosDeSaudeDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdicionar;
     private javax.swing.JButton buttonCancelar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -223,6 +243,7 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel labelTitulo;
     private javax.swing.JTextField textCodigo;
     private javax.swing.JTextField textNomeDaOperadora;
     private javax.swing.JTextField textTipoDoPlano;

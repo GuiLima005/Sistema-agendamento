@@ -1,10 +1,14 @@
 package br.senai.sp.jandira.ui;
 
 import br.senai.sp.jandira.dao.PlanoDeSaudeDAO;
+import br.senai.sp.jandira.model.PlanoDeSaude;
+import br.senai.sp.jandira.model.TipoOperacao;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 public class PlanosDeSaudePanel extends javax.swing.JPanel {
+
+    int linha;
 
     public PlanosDeSaudePanel() {
         initComponents();
@@ -20,7 +24,7 @@ public class PlanosDeSaudePanel extends javax.swing.JPanel {
         tablePlanosDeSaude = new javax.swing.JTable();
         buttonDeletar = new javax.swing.JButton();
         buttonAdicionar = new javax.swing.JButton();
-        buttonEditar = new javax.swing.JButton();
+        buttonAlterar = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setPreferredSize(new java.awt.Dimension(960, 400));
@@ -70,45 +74,83 @@ public class PlanosDeSaudePanel extends javax.swing.JPanel {
         add(buttonAdicionar);
         buttonAdicionar.setBounds(860, 300, 70, 60);
 
-        buttonEditar.setBackground(new java.awt.Color(246, 246, 246));
-        buttonEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/editar48.png"))); // NOI18N
-        buttonEditar.setToolTipText("Editar Plano de Saúde selecionado");
-        add(buttonEditar);
-        buttonEditar.setBounds(770, 300, 70, 60);
+        buttonAlterar.setBackground(new java.awt.Color(246, 246, 246));
+        buttonAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/editar48.png"))); // NOI18N
+        buttonAlterar.setToolTipText("Alterar Plano de Saúde selecionado");
+        buttonAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAlterarActionPerformed(evt);
+            }
+        });
+        add(buttonAlterar);
+        buttonAlterar.setBounds(770, 300, 70, 60);
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarActionPerformed
-        PlanosDeSaudeDialog planosDeSaudeDialog = new PlanosDeSaudeDialog(null, true);
+        PlanosDeSaudeDialog planosDeSaudeDialog = new PlanosDeSaudeDialog(null, true, TipoOperacao.ADICIONAR, null);
         planosDeSaudeDialog.setVisible(true);
-        
+
         criarTabelaPlanosDeSaude();
-        
+
     }//GEN-LAST:event_buttonAdicionarActionPerformed
 
     private void buttonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeletarActionPerformed
-        
-        int resposta = JOptionPane.showConfirmDialog(this, "Você confirma a exclusão do plano de saúde selecionado?", "Plano de Saúde", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        
-        int linha = tablePlanosDeSaude.getSelectedRow();
-        
+
+        // Obtemos o índice da linha selecionada na tabela
+        linha = tablePlanosDeSaude.getSelectedRow();
+
+        // Verificamos se a linha é diferente de -1
+        // -1 significa que o usuário não selecionou nada
         if (linha != -1) {
-            //Excluir o plano
-            String codigoStr = tablePlanosDeSaude.getValueAt(linha, 0).toString();
-            Integer codigo = Integer.valueOf(codigoStr);
-            PlanoDeSaudeDAO.excluir(codigo);
-            criarTabelaPlanosDeSaude(); 
-            
-        }else{
+            excluir();
+        } else {
             JOptionPane.showMessageDialog(this, "Por favor, selecione o plano que você deseja excluir!", "Plano de Saúde", JOptionPane.ERROR_MESSAGE);
         }
-                
+
     }//GEN-LAST:event_buttonDeletarActionPerformed
+
+    private void buttonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAlterarActionPerformed
+        
+        linha = tablePlanosDeSaude.getSelectedRow();
+
+        if (linha != -1) {
+            editar();
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, selecione um plano de saúde para alterar.", "Plano de Saúde", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_buttonAlterarActionPerformed
+
+    private void editar() {
+        
+        PlanoDeSaude planoDeSaude = PlanoDeSaudeDAO.getPlanoDeSaude(getCodigo());
+
+        PlanosDeSaudeDialog planosDeSaudeDialog = new PlanosDeSaudeDialog(null, true, TipoOperacao.ALTERAR, planoDeSaude);
+        planosDeSaudeDialog.setVisible(true);
+        criarTabelaPlanosDeSaude();
+    }
+
+    //Excluir o plano
+    private void excluir() {
+
+        int resposta = JOptionPane.showConfirmDialog(this, "Você confirma a exclusão do plano de saúde selecionado?", "Plano de Saúde", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        if (resposta == 0) {
+            PlanoDeSaudeDAO.excluir(getCodigo());
+            criarTabelaPlanosDeSaude();
+        }
+    }
+
+    private Integer getCodigo() {
+        String codigoStr = tablePlanosDeSaude.getValueAt(linha, 0).toString();
+        return Integer.valueOf(codigoStr);
+
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdicionar;
+    private javax.swing.JButton buttonAlterar;
     private javax.swing.JButton buttonDeletar;
-    private javax.swing.JButton buttonEditar;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane scrollPlanoDeSaude;
     private javax.swing.JTable tablePlanosDeSaude;
