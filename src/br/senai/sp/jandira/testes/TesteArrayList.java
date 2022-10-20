@@ -125,7 +125,8 @@ public class TesteArrayList {
 //		dao.gravar(plano2);
 //		
 //		System.out.println(dao.listarTodos());
-//		
+//		 PlanoDeSaude plano1 = new PlanoDeSaude("Amil", "Basic");
+        
 //		
     }
 

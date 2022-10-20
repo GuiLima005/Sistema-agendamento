@@ -7,22 +7,22 @@ public class TesteDAO {
 
     public static void main(String[] args) {
 
-        String[] linha0 = {"Cotia", "Itapevi", "Jandira"};
-        String[] linha1 = {"Barueri", "Carapicuíba", "Pirapora"};
-        String[] linha2 = {"Osasco", "Itu", "Valinhos"};
-        String[] linha3 = {"Presidente Prudente", "São Roque", "Pindamonhangaba"};
+        //String[] linha0 = {"Cotia", "Itapevi", "Jandira"};
+        //String[] linha1 = {"Barueri", "Carapicuíba", "Pirapora"};
+        //String[] linha2 = {"Osasco", "Itu", "Valinhos"};
+        //String[] linha3 = {"Presidente Prudente", "São Roque", "Pindamonhangaba"};
 
-        String[][] linhas = {linha0, linha1, linha2, linha3};
+        //String[][] linhas = {linha0, linha1, linha2, linha3};
 
-        System.out.println(linhas[2][2]);
+        //System.out.println(linhas[2][2]);
 
-        String[][] frutas = {
-            {"Banana", "Maça", "Pera"},
-            {"Melancia", "Uva", "Abacate"},
-            {"Ameixa", "Pessêgo", "Abacaxi"}
-        };
+        //String[][] frutas = {
+            //{"Banana", "Maça", "Pera"},
+            //{"Melancia", "Uva", "Abacate"},
+            //{"Ameixa", "Pessêgo", "Abacaxi"}
+        //};
 
-        System.out.println(frutas[2][0]);
+        //System.out.println(frutas[2][0]);
 
         PlanoDeSaude plano1 = new PlanoDeSaude("Amil", "Basic");
         PlanoDeSaude plano2 = new PlanoDeSaude("Allianz", "Bronze");

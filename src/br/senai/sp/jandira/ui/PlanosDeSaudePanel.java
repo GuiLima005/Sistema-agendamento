@@ -50,7 +50,7 @@ public class PlanosDeSaudePanel extends javax.swing.JPanel {
         scrollPlanoDeSaude.setViewportView(tablePlanosDeSaude);
 
         add(scrollPlanoDeSaude);
-        scrollPlanoDeSaude.setBounds(20, 40, 920, 220);
+        scrollPlanoDeSaude.setBounds(20, 50, 920, 220);
 
         buttonDeletar.setBackground(new java.awt.Color(246, 246, 246));
         buttonDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/deletar48.png"))); // NOI18N
