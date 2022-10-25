@@ -4,7 +4,7 @@ import br.senai.sp.jandira.model.Especialidade;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
-public class EspecialidadeDAO { //Simular nosso bamco de dados
+public class EspecialidadeDAO { //Simular nosso banco de dados
 
     private Especialidade especialidade;
     private static ArrayList<Especialidade> especialidades = new ArrayList<>();
@@ -67,12 +67,12 @@ public class EspecialidadeDAO { //Simular nosso bamco de dados
 
     public static DefaultTableModel getTableModel() {
 
-        //Matriz que receberá os planos de saúde
+        //Matriz que receberá as especialidades
         //que serão utilizados na tabela (JTable)
         Object[][] dados = new Object[especialidades.size()][3];
 
-        //For Each, para extrair cada objeto plano de saúde do
-        //Arraylist planos e separar cada dado na matriz dados
+        //For Each, para extrair cada objeto Especialidade do
+        //Arraylist especialidades e separar cada dado na matriz dados
         int i = 0;
         for (Especialidade e : especialidades) {
             dados[i][0] = e.getCodigo();
@@ -85,7 +85,7 @@ public class EspecialidadeDAO { //Simular nosso bamco de dados
         String[] titulos = {"Código", "Especialidades", "Descrição"};
 
         //Criar o modelo que será utilizado pela JTable
-        //para exibir os dados dos planos
+        //para exibir os dados das especialidades
         DefaultTableModel tableModel = new DefaultTableModel(dados, titulos);
 
         return tableModel;

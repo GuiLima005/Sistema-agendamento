@@ -41,7 +41,7 @@ public class PlanoDeSaude {
         return this.operadora;
     }
 
-    public void seTipoDoPlano(String tipoDoPlano) {
+    public void setTipoDoPlano(String tipoDoPlano) {
         this.tipoDoPlano = tipoDoPlano;
     }
 

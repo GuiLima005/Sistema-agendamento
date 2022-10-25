@@ -6,6 +6,7 @@ public class Especialidade {
     private Integer codigo;
     private String nome;
     private String descricao;
+    private static int quantidade;
 
     public Especialidade(String nome, String descricao) {
         this.nome = nome;
@@ -16,6 +17,11 @@ public class Especialidade {
     private void atualizarCodigo() {
         this.codigo = contador;
         contador++;
+    }
+    
+    public Especialidade() {
+        atualizarCodigo();
+        quantidade++;
     }
 
     //Método de acesso getters and setters
@@ -41,5 +47,9 @@ public class Especialidade {
 
     public static int getContador() {
         return contador;
+    }
+
+    public static int getQuantidade() {
+        return quantidade;
     }
 }

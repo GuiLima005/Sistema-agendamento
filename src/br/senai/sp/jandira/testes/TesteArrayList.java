@@ -110,13 +110,16 @@ public class TesteArrayList {
         e3.setNome("Fisioterapia");
         e3.setDescricao("Cuida dos ossos e músculos");
 
-        ArrayList<Especialidade> especialidade = new ArrayList<>();
-        especialidade.add(e1);
-        especialidade.add(e2);
-        especialidade.add(e3);
+        Especialidade es = new Especialidade("teste", "teste");
+
+        ArrayList<Especialidade> especialidades = new ArrayList<>();
+        especialidades.add(e1);
+        especialidades.add(e2);
+        especialidades.add(e3);
+        especialidades.add(es);
 
         System.out.println("------------------------------------");
-        for (Especialidade e : especialidade) {
+        for (Especialidade e : especialidades) {
             System.out.printf("%s --> %s\n", e.getNome(), e.getDescricao());
         }
 
@@ -126,7 +129,6 @@ public class TesteArrayList {
 //		
 //		System.out.println(dao.listarTodos());
 //		 PlanoDeSaude plano1 = new PlanoDeSaude("Amil", "Basic");
-        
 //		
     }
 

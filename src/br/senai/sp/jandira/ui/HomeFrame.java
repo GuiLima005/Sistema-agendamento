@@ -7,12 +7,6 @@ import javax.swing.JTable;
 public class HomeFrame extends javax.swing.JFrame {
 
     private EspecialidadePanel especialidadePanel;
-
-    private final int POSICAO_X2 = 10;
-    private final int POSICAO_Y2 = 230;
-    private final int LARGURA2 = 960;
-    private final int ALTURA2 = 400;
-
     private PlanosDeSaudePanel planosDeSaudePanel;
 
     private final int POSICAO_X = 10;
@@ -257,7 +251,7 @@ public class HomeFrame extends javax.swing.JFrame {
     private void initPanels() {
         especialidadePanel = new EspecialidadePanel();
 
-        especialidadePanel.setBounds(POSICAO_X2, POSICAO_Y2, LARGURA2, ALTURA2);
+        especialidadePanel.setBounds(POSICAO_X, POSICAO_Y, LARGURA, ALTURA);
 
         getContentPane().add(especialidadePanel);
         especialidadePanel.setVisible(false);

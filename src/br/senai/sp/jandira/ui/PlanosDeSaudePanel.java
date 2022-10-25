@@ -108,7 +108,6 @@ public class PlanosDeSaudePanel extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_buttonDeletarActionPerformed
-
     private void buttonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAlterarActionPerformed
         
         linha = tablePlanosDeSaude.getSelectedRow();
