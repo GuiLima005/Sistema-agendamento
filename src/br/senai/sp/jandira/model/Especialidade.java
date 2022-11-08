@@ -14,11 +14,18 @@ public class Especialidade {
         atualizarCodigo();
     }
 
-    private void atualizarCodigo() {
-        this.codigo = contador;
-        contador++;
+    public Especialidade(Integer codigo, String nome, String descricao) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.contador = this.codigo;
     }
-    
+
+    private void atualizarCodigo() {
+        contador++;
+        this.codigo = contador;
+    }
+
     public Especialidade() {
         atualizarCodigo();
         quantidade++;
@@ -51,5 +58,10 @@ public class Especialidade {
 
     public static int getQuantidade() {
         return quantidade;
+    }
+
+    public String getEspecialidadeSeperadoPorPontoEVirgula() {
+        String especialidadeStr = this.codigo + ";" + this.nome + ";" + this.descricao;
+        return especialidadeStr;
     }
 }

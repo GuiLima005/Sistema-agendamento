@@ -1,13 +1,28 @@
 package br.senai.sp.jandira.dao;
 
 import br.senai.sp.jandira.model.Especialidade;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class EspecialidadeDAO { //Simular nosso banco de dados
 
     private Especialidade especialidade;
     private static ArrayList<Especialidade> especialidades = new ArrayList<>();
+    private static final String ARQUIVO = "C:\\Users\\22282086\\projetos\\especialidade.txt";
+    private static final String ARQUIVO_TEMP = "C:\\Users\\22282086\\projetos\\especialidade_temp.txt";
+    private static final Path PATH = Paths.get(ARQUIVO);
+    private static final Path PATH_TEMP = Paths.get(ARQUIVO_TEMP);
 
     public EspecialidadeDAO(Especialidade especialidade) {
         especialidades.add(especialidade);
@@ -19,15 +34,61 @@ public class EspecialidadeDAO { //Simular nosso banco de dados
 
     public static void gravar(Especialidade especialidade) {
         especialidades.add(especialidade);
+
+        try {
+            // Gravar a especialidade no arquivo Especialidade.txt
+            BufferedWriter bw = Files.newBufferedWriter(PATH,
+                    StandardOpenOption.APPEND, StandardOpenOption.WRITE);
+            bw.write(especialidade.getEspecialidadeSeperadoPorPontoEVirgula());
+            bw.newLine();
+            bw.close();
+
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null,
+                    "Ocorreu um erro ao gravar.\n\nEntre em contato com o suporte.",
+                    "Erro ao gravar", JOptionPane.ERROR_MESSAGE);
+        }
+
     }
 
     public static boolean excluir(Integer codigo) {
         for (Especialidade e : especialidades) {
             if (e.getCodigo().equals(codigo)) {
                 especialidades.remove(e);
-                return true;
+                break;
             }
         }
+        
+        File arquivoAtual = new File(ARQUIVO);
+        File arquivoTemp = new File(ARQUIVO_TEMP);
+
+        try {
+            arquivoTemp.createNewFile();
+            
+            BufferedWriter bwTemp = Files.newBufferedWriter(
+                    PATH,
+                    StandardOpenOption.APPEND,
+                    StandardOpenOption.WRITE);
+            for (Especialidade e : especialidades) {
+                bwTemp.write(e.getEspecialidadeSeperadoPorPontoEVirgula());
+                bwTemp.newLine();
+            }
+
+            // Fechar o arquivo temporário
+            bwTemp.close();
+
+            // Excluir o arquivo atual - especialidade.txt
+            //arquivoAtual.delete();
+
+            //Renomear o aquivo temporário
+            //arquivoTemp.renameTo(arquivoAtual);
+
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null,
+                    "Ocorreu um erro ao criar o arquivo!",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+
         return false;
     }
 
@@ -53,15 +114,29 @@ public class EspecialidadeDAO { //Simular nosso banco de dados
         return especialidades;
     }
 
-    public static void criarEspecialidadeTeste() {
-        Especialidade e1 = new Especialidade("Cardiologia", "cuida do coração");
-        Especialidade e2 = new Especialidade("Cardiologia", "cuida do coração");
-        Especialidade e3 = new Especialidade("Cardiologia", "cuida do coração");
-        Especialidade e4 = new Especialidade("Cardiologia", "cuida do coração");
-        especialidades.add(e1);
-        especialidades.add(e2);
-        especialidades.add(e3);
-        especialidades.add(e4);
+    public static void getEspecialidade() {
+
+        try {
+            // Abrir o arquivo para leitura
+            BufferedReader br = Files.newBufferedReader(PATH);
+
+            String linha = br.readLine();
+
+            while (linha != null && !linha.isEmpty()) {
+                String[] linhaVetor = linha.split(";");
+                Especialidade novaEspecialidade = new Especialidade(
+                        Integer.valueOf(linhaVetor[0]), linhaVetor[1], linhaVetor[2]);
+                especialidades.add(novaEspecialidade);
+                linha = br.readLine();
+            }
+
+            br.close();
+
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null,
+                    "Ocorreu um erro ao abrir o arquivo",
+                    "Erro de leitura", JOptionPane.ERROR_MESSAGE);
+        }
 
     }
 

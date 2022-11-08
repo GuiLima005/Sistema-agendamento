@@ -158,7 +158,7 @@ private void criarTabelaEspecialidade() {
         // Definir a largura de cada coluna
         tableEspecialidade.getColumnModel().getColumn(0).setPreferredWidth(150);
         tableEspecialidade.getColumnModel().getColumn(1).setPreferredWidth(350);
-        tableEspecialidade.getColumnModel().getColumn(2).setPreferredWidth(350);
+        tableEspecialidade.getColumnModel().getColumn(2).setPreferredWidth(417);
 
         // Impedir/Bloquear a movimentação da colunas
         tableEspecialidade.getTableHeader().setReorderingAllowed(false);
