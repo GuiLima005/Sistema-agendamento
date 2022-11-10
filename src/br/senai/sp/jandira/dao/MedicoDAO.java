@@ -1,6 +1,6 @@
 package br.senai.sp.jandira.dao;
 
-import br.senai.sp.jandira.model.Especialidade;
+import br.senai.sp.jandira.model.Medico;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,39 +10,29 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class EspecialidadeDAO { //Simular nosso banco de dados
-
-    private Especialidade especialidade;
-    private static ArrayList<Especialidade> especialidades = new ArrayList<>();
-    private static final String ARQUIVO = "C:\\Users\\22282086\\projetos\\especialidade.txt";
-    private static final String ARQUIVO_TEMP = "C:\\Users\\22282086\\projetos\\especialidade_temp.txt";
+public class MedicoDAO {
+    
+    private Medico medico;
+    private static ArrayList<Medico> medicos = new ArrayList<>();
+    private static final String ARQUIVO = "C:\\Users\\22282086\\projetos\\medico.txt";
+    private static final String ARQUIVO_TEMP = "C:\\Users\\22282086\\projetos\\medico_temp.txt";
     private static final Path PATH = Paths.get(ARQUIVO);
     private static final Path PATH_TEMP = Paths.get(ARQUIVO_TEMP);
-
-    public EspecialidadeDAO(Especialidade especialidade) {
-        especialidades.add(especialidade);
-    }
-
-    public EspecialidadeDAO() {
-
-    }
-
-    public static void gravar(Especialidade especialidade) {
-        especialidades.add(especialidade);
+   
+    public static void gravar(Medico medico) {
+        medicos.add(medico);
 
         try {
-            // Gravar a especialidade no arquivo Especialidade.txt
+            // Gravar medico no arquivo medico.txt
             BufferedWriter bw = Files.newBufferedWriter(PATH,
                     StandardOpenOption.APPEND, StandardOpenOption.WRITE);
 
-            String novaEspecialidade = especialidade.getEspecialidadeSeperadoPorPontoEVirgula();
+            String novoMedico = medico.getMedicoSeperadoPorPontoEVirgula();
 
-            bw.write(novaEspecialidade);
+            bw.write(novoMedico);
             bw.newLine();
             bw.close();
 
@@ -55,9 +45,9 @@ public class EspecialidadeDAO { //Simular nosso banco de dados
     }
 
     public static boolean excluir(Integer codigo) {
-        for (Especialidade e : especialidades) {
-            if (e.getCodigo().equals(codigo)) {
-                especialidades.remove(e);
+        for (Medico m : medicos) {
+            if (m.getCodigo().equals(codigo)) {
+                medicos.remove(m);
                 break;
             }
         }
@@ -83,15 +73,15 @@ public class EspecialidadeDAO { //Simular nosso banco de dados
                     StandardOpenOption.WRITE);
             
             
-            for (Especialidade e : especialidades) {
-                bwTemp.write(e.getEspecialidadeSeperadoPorPontoEVirgula());
+            for (Medico m : medicos) {
+                bwTemp.write(m.getMedicoSeperadoPorPontoEVirgula());
                 bwTemp.newLine();
             }
 
             // Fechar o arquivo temporário
             bwTemp.close();
 
-            // Excluir o arquivo atual - especialidade.txt
+            // Excluir o arquivo atual - medico.txt
             arquivoAtual.delete();
 
             //Renomear o aquivo temporário
@@ -99,36 +89,36 @@ public class EspecialidadeDAO { //Simular nosso banco de dados
 
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null,
-                    "Ocorreu um erro ao criar o arquivo especialidade!",
+                    "Ocorreu um erro ao criar o arquivo medico!",
                     "Erro", JOptionPane.ERROR_MESSAGE);
         }
         
 }
 
-    public static Especialidade getEspecialidade(Integer codigo) {
-        for (Especialidade e : especialidades) {
-            if (e.getCodigo().equals(codigo)) {
-                return e;
+    public static Medico getMedico(Integer codigo) {
+        for (Medico m : medicos) {
+            if (m.getCodigo().equals(codigo)) {
+                return m;
             }
         }
         return null;
     }
 
-    public static void atualizar(Especialidade especialidade) {
-        for (Especialidade e : especialidades) {
-            if (e.getCodigo().equals(especialidade.getCodigo())) {
-                especialidades.set(especialidades.indexOf(e), especialidade);
+    public static void atualizar(Medico medico) {
+        for (Medico m : medicos) {
+            if (m.getCodigo().equals(medico.getCodigo())) {
+                medicos.set(medicos.indexOf(m), medico);
                 break;
             }
         }
         atualizarArquivo();
     }
 
-    public static ArrayList<Especialidade> listarTodos() {
-        return especialidades;
+    public static ArrayList<Medico> listarTodos() {
+        return medicos;
     }
 
-    public static void getEspecialidade() {
+    public static void getMedico() {
 
         try {
             // Abrir o arquivo para leitura
@@ -138,9 +128,8 @@ public class EspecialidadeDAO { //Simular nosso banco de dados
 
             while (linha != null && !linha.isEmpty()) {
                 String[] linhaVetor = linha.split(";");
-                Especialidade novaEspecialidade = new Especialidade(
-                        Integer.valueOf(linhaVetor[0]), linhaVetor[1], linhaVetor[2]);
-                especialidades.add(novaEspecialidade);
+                Medico novoMedico = new Medico(Integer.valueOf(linhaVetor[0]), linhaVetor[1], linhaVetor[2]);
+                medicos.add(novoMedico);
                 linha = br.readLine();
             }
 
@@ -148,7 +137,7 @@ public class EspecialidadeDAO { //Simular nosso banco de dados
 
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null,
-                    "Ocorreu um erro ao abrir o arquivo especialidade",
+                    "Ocorreu um erro ao abrir o arquivo medico",
                     "Erro de leitura", JOptionPane.ERROR_MESSAGE);
         }
 
@@ -158,20 +147,21 @@ public class EspecialidadeDAO { //Simular nosso banco de dados
 
         //Matriz que receberá as especialidades
         //que serão utilizados na tabela (JTable)
-        Object[][] dados = new Object[especialidades.size()][3];
+        Object[][] dados = new Object[medicos.size()][3];
 
         //For Each, para extrair cada objeto Especialidade do
         //Arraylist especialidades e separar cada dado na matriz dados
         int i = 0;
-        for (Especialidade e : especialidades) {
-            dados[i][0] = e.getCodigo();
-            dados[i][1] = e.getNome();
-            dados[i][2] = e.getDescricao();
+        for (Medico m : medicos) {
+            dados[i][0] = m.getCodigo();
+            dados[i][1] = m.getCrm();
+            dados[i][2] = m.getNome();
+            
             i++;
         }
 
         //Definir um vetor com os nomes das colunas da tabela
-        String[] titulos = {"Código", "Especialidades", "Descrição"};
+        String[] titulos = {"Código", "CRM", "Nome do médico:"};
 
         //Criar o modelo que será utilizado pela JTable
         //para exibir os dados das especialidades
@@ -180,5 +170,13 @@ public class EspecialidadeDAO { //Simular nosso banco de dados
         return tableModel;
 
     }
+ 
+
+
+
+
+
+
+
 
 }

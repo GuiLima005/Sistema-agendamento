@@ -1,6 +1,7 @@
 package br.senai.sp.jandira.ui;
 
 import br.senai.sp.jandira.dao.EspecialidadeDAO;
+import br.senai.sp.jandira.dao.MedicoDAO;
 import br.senai.sp.jandira.dao.PlanoDeSaudeDAO;
 import javax.swing.JTable;
 
@@ -8,6 +9,7 @@ public class HomeFrame extends javax.swing.JFrame {
 
     private EspecialidadePanel especialidadePanel;
     private PlanosDeSaudePanel planosDeSaudePanel;
+    private MedicoPanel medicoPanel;
 
     private final int POSICAO_X = 10;
     private final int POSICAO_Y = 230;
@@ -18,6 +20,7 @@ public class HomeFrame extends javax.swing.JFrame {
         initComponents();
         PlanoDeSaudeDAO.getListaPlanosDeSaude();
         EspecialidadeDAO.getEspecialidade();
+        MedicoDAO.getMedico();
         initPanels();
 
     }
@@ -197,7 +200,9 @@ public class HomeFrame extends javax.swing.JFrame {
         buttonEspecialidade.setBackground(new java.awt.Color(0, 153, 255));
         buttonHome.setBackground(new java.awt.Color(246, 246, 246));
         buttonPlanoDeSaude.setBackground(new java.awt.Color(246, 246, 246));
+        buttonMedico.setBackground(new java.awt.Color(246, 246, 246));
         panelHome.setVisible(false);
+        medicoPanel.setVisible(false);
         especialidadePanel.setVisible(true);
     }//GEN-LAST:event_buttonEspecialidadeActionPerformed
     private void buttonPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPacienteActionPerformed
@@ -205,25 +210,35 @@ public class HomeFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_buttonPacienteActionPerformed
     private void buttonMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMedicoActionPerformed
-
-
+        buttonMedico.setBackground(new java.awt.Color(0, 153, 255));
+        buttonEspecialidade.setBackground(new java.awt.Color(246, 246, 246));
+        buttonHome.setBackground(new java.awt.Color(246, 246, 246));
+        buttonPlanoDeSaude.setBackground(new java.awt.Color(246, 246, 246));
+        medicoPanel.setVisible(true);
+        panelHome.setVisible(false);
+        especialidadePanel.setVisible(false);
+        planosDeSaudePanel.setVisible(false);
     }//GEN-LAST:event_buttonMedicoActionPerformed
 
     private void buttonPlanoDeSaudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPlanoDeSaudeActionPerformed
         buttonPlanoDeSaude.setBackground(new java.awt.Color(0, 153, 255));
         buttonHome.setBackground(new java.awt.Color(246, 246, 246));
         buttonEspecialidade.setBackground(new java.awt.Color(246, 246, 246));
+        buttonMedico.setBackground(new java.awt.Color(246, 246, 246));
         panelHome.setVisible(false);
         especialidadePanel.setVisible(false);
+        medicoPanel.setVisible(false);
         planosDeSaudePanel.setVisible(true);
     }//GEN-LAST:event_buttonPlanoDeSaudeActionPerformed
     private void buttonHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHomeActionPerformed
         buttonHome.setBackground(new java.awt.Color(0, 153, 255));
         buttonPlanoDeSaude.setBackground(new java.awt.Color(246, 246, 246));
         buttonEspecialidade.setBackground(new java.awt.Color(246, 246, 246));
+        buttonMedico.setBackground(new java.awt.Color(246, 246, 246));
         panelHome.setVisible(true);
         planosDeSaudePanel.setVisible(false);
         especialidadePanel.setVisible(false);
+        medicoPanel.setVisible(false);
     }//GEN-LAST:event_buttonHomeActionPerformed
 
 
@@ -249,6 +264,13 @@ public class HomeFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void initPanels() {
+        medicoPanel = new MedicoPanel();
+
+        medicoPanel.setBounds(POSICAO_X, POSICAO_Y, LARGURA, ALTURA);
+
+        getContentPane().add(medicoPanel);
+        medicoPanel.setVisible(false);
+
         especialidadePanel = new EspecialidadePanel();
 
         especialidadePanel.setBounds(POSICAO_X, POSICAO_Y, LARGURA, ALTURA);

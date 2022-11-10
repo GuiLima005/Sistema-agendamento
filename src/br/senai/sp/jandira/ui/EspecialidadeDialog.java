@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 public class EspecialidadeDialog extends javax.swing.JDialog {
 
-     private TipoOperacao tipoOperacao;
+    private TipoOperacao tipoOperacao;
     private Especialidade especialidade;
     
     public EspecialidadeDialog(java.awt.Frame parent, boolean modal, TipoOperacao tipoOperacao, Especialidade especialidade) {
@@ -116,6 +116,11 @@ public class EspecialidadeDialog extends javax.swing.JDialog {
         jLabel3.setBounds(50, 20, 250, 25);
 
         textCodigo.setEditable(false);
+        textCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textCodigoActionPerformed(evt);
+            }
+        });
         jPanel3.add(textCodigo);
         textCodigo.setBounds(50, 100, 130, 30);
 
@@ -184,11 +189,9 @@ public class EspecialidadeDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
 
     }//GEN-LAST:event_buttonCancelarActionPerformed
-
     private void buttonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarActionPerformed
 
         if (tipoOperacao == TipoOperacao.ADICIONAR) {
@@ -198,6 +201,10 @@ public class EspecialidadeDialog extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_buttonAdicionarActionPerformed
+
+    private void textCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textCodigoActionPerformed
     
     private void atualizar() {
         especialidade.setNome(textNomeDaEspecialidade.getText());

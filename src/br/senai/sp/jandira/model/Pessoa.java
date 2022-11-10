@@ -4,11 +4,11 @@ import java.time.LocalDate;
 
 public class Pessoa {
     
-    private String nome;
+    String nome;
     private String email;
     private int telefone;
     private LocalDate dataNascimento;
-
+    
     public String getNome() {
         return nome;
     }

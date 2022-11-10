@@ -103,7 +103,7 @@ public class PlanoDeSaudeDAO { // Simular nosso banco de dados
 
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null,
-                    "Ocorreu um erro ao criar o arquivo!",
+                    "Ocorreu um erro ao criar o arquivo plano de sade!",
                     "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -151,7 +151,7 @@ public class PlanoDeSaudeDAO { // Simular nosso banco de dados
 
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null,
-                    "Ocorreu um erro ao abrir o arquivo",
+                    "Ocorreu um erro ao abrir o arquivo plano de saúde",
                     "Erro de leitura", JOptionPane.ERROR_MESSAGE);
         }
     }
