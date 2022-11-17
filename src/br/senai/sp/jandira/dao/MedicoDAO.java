@@ -89,7 +89,7 @@ public class MedicoDAO {
 
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null,
-                    "Ocorreu um erro ao criar o arquivo medico!",
+                    "Ocorreu um erro ao criar o arquivo médico!",
                     "Erro", JOptionPane.ERROR_MESSAGE);
         }
         
@@ -145,11 +145,11 @@ public class MedicoDAO {
 
     public static DefaultTableModel getTableModel() {
 
-        //Matriz que receberá as especialidades
+        //Matriz que receberá os medicos
         //que serão utilizados na tabela (JTable)
         Object[][] dados = new Object[medicos.size()][3];
 
-        //For Each, para extrair cada objeto Especialidade do
+        //For Each, para extrair cada objeto Medico do
         //Arraylist especialidades e separar cada dado na matriz dados
         int i = 0;
         for (Medico m : medicos) {
@@ -164,7 +164,7 @@ public class MedicoDAO {
         String[] titulos = {"Código", "CRM", "Nome do médico:"};
 
         //Criar o modelo que será utilizado pela JTable
-        //para exibir os dados das especialidades
+        //para exibir os dados dos medicos
         DefaultTableModel tableModel = new DefaultTableModel(dados, titulos);
 
         return tableModel;

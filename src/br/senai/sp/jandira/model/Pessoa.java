@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Pessoa {
     
     String nome;
-    private String email;
+    String email;
     private int telefone;
     private LocalDate dataNascimento;
     

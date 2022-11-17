@@ -219,7 +219,7 @@ public class EspecialidadeDialog extends javax.swing.JDialog {
     
     private void gravar() {
 
-        //Criar um objeto Plano de Saúde
+        //Criar um objeto Especialidade
         Especialidade especialidade = new Especialidade();
         especialidade.setNome(textNomeDaEspecialidade.getText());
         especialidade.setDescricao(textDescricao.getText());

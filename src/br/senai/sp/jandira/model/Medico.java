@@ -7,22 +7,27 @@ public class Medico extends Pessoa {
     private static int contador = 300;
     private Integer codigo;
     private String crm;
+    private static int quantidade;
     private ArrayList<Especialidade> especialidades;
 
     // Métodos de acesso
-    
-     public Medico(Integer codigo, String crm, String nome) {
+    public Medico(Integer codigo, String crm, String nome) {
         this.codigo = codigo;
-        this.nome = nome;
         this.crm = crm;
+        this.nome = nome;
         this.contador = this.codigo;
     }
-     
-      private void atualizarCodigo() {
+
+    private void atualizarCodigo() {
         contador++;
         this.codigo = contador;
     }
-    
+
+    public Medico() {
+        atualizarCodigo();
+        quantidade++;
+    }
+
     public ArrayList<Especialidade> getEspecialidades() {
         return especialidades;
     }
@@ -33,6 +38,14 @@ public class Medico extends Pessoa {
 
     public String getCrm() {
         return crm;
+    }
+
+    public static int getQuantidade() {
+        return quantidade;
+    }
+
+    public static void setQuantidade(int quantidade) {
+        Medico.quantidade = quantidade;
     }
 
     public void setCrm(String crm) {
@@ -54,7 +67,8 @@ public class Medico extends Pessoa {
     public void setCodigo(Integer codigo) {
         this.codigo = codigo;
     }
-     public String getMedicoSeperadoPorPontoEVirgula() {
+
+    public String getMedicoSeperadoPorPontoEVirgula() {
         String medicoStr = this.codigo + ";" + this.getCrm() + ";" + this.getNome();
         return medicoStr;
     }
