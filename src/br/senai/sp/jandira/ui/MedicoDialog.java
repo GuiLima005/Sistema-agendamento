@@ -4,12 +4,12 @@ import br.senai.sp.jandira.dao.MedicoDAO;
 import br.senai.sp.jandira.model.Medico;
 import br.senai.sp.jandira.model.TipoOperacao;
 import java.awt.Label;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 public class MedicoDialog extends javax.swing.JDialog {
-
     
     private TipoOperacao tipoOperacao;
     private Medico medico;
@@ -32,8 +32,7 @@ public class MedicoDialog extends javax.swing.JDialog {
         textNomeMedico.setText(medico.getNome());
         textCrm.setText(medico.getCrm());
         textEmail.setText(medico.getEmail());
-//        textDataNascimento.setText(LocalDate.parse(medico.DataNascimento(),DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-//        textTelefone
+        textTelefone.setText(medico.getTelefone());
         
     }
 
@@ -403,7 +402,7 @@ public class MedicoDialog extends javax.swing.JDialog {
         medico.setNome(textNomeMedico.getText());
         medico.setCrm(textCrm.getText());
         medico.setEmail(textEmail.getText());
-//        medico.setTelefone();
+        medico.setTelefone(textTelefone.getText());
 //        medico.setDataNascimento();
         
 
@@ -421,15 +420,15 @@ public class MedicoDialog extends javax.swing.JDialog {
         medico.setNome(textNomeMedico.getText());
         medico.setCrm(textCrm.getText());
         medico.setEmail(textEmail.getText());
+        medico.setTelefone(textTelefone.getText());
 //        medico.setDataNascimento
-//        medico.setTelefone();
         
         
 
         if (validarCadastro()) {
             MedicoDAO.gravar(medico);
 
-            JOptionPane.showMessageDialog(this, "Medico gravado com sucesso!", "Medico", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Medico gravado com sucesso!", "Médico", JOptionPane.INFORMATION_MESSAGE);
             dispose();
         }
     }

@@ -14,14 +14,14 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class MedicoDAO {
-    
+
     private Medico medico;
     private static ArrayList<Medico> medicos = new ArrayList<>();
     private static final String ARQUIVO = "C:\\Users\\22282086\\projetos\\medico.txt";
     private static final String ARQUIVO_TEMP = "C:\\Users\\22282086\\projetos\\medico_temp.txt";
     private static final Path PATH = Paths.get(ARQUIVO);
     private static final Path PATH_TEMP = Paths.get(ARQUIVO_TEMP);
-   
+
     public static void gravar(Medico medico) {
         medicos.add(medico);
 
@@ -51,16 +51,15 @@ public class MedicoDAO {
                 break;
             }
         }
-        
+
         atualizarArquivo();
 
         return false;
-      
+
     }
-    
-    
+
     private static void atualizarArquivo() {
-      
+
         File arquivoAtual = new File(ARQUIVO);
         File arquivoTemp = new File(ARQUIVO_TEMP);
 
@@ -71,8 +70,7 @@ public class MedicoDAO {
                     PATH_TEMP,
                     StandardOpenOption.APPEND,
                     StandardOpenOption.WRITE);
-            
-            
+
             for (Medico m : medicos) {
                 bwTemp.write(m.getMedicoSeperadoPorPontoEVirgula());
                 bwTemp.newLine();
@@ -92,8 +90,8 @@ public class MedicoDAO {
                     "Ocorreu um erro ao criar o arquivo médico!",
                     "Erro", JOptionPane.ERROR_MESSAGE);
         }
-        
-}
+
+    }
 
     public static Medico getMedico(Integer codigo) {
         for (Medico m : medicos) {
@@ -125,10 +123,11 @@ public class MedicoDAO {
             BufferedReader br = Files.newBufferedReader(PATH);
 
             String linha = br.readLine();
+            
 
             while (linha != null && !linha.isEmpty()) {
                 String[] linhaVetor = linha.split(";");
-                Medico novoMedico = new Medico(Integer.valueOf(linhaVetor[0]), linhaVetor[1], linhaVetor[2]);
+                Medico novoMedico = new Medico(Integer.valueOf(linhaVetor[0]), linhaVetor[1], linhaVetor[2], linhaVetor[3], linhaVetor[4]);
                 medicos.add(novoMedico);
                 linha = br.readLine();
             }
@@ -156,12 +155,12 @@ public class MedicoDAO {
             dados[i][0] = m.getCodigo();
             dados[i][1] = m.getCrm();
             dados[i][2] = m.getNome();
-            
+
             i++;
         }
 
         //Definir um vetor com os nomes das colunas da tabela
-        String[] titulos = {"Código", "CRM", "Nome do médico:"};
+        String[] titulos = {"Código", "CRM", "Nome do médico"};
 
         //Criar o modelo que será utilizado pela JTable
         //para exibir os dados dos medicos
@@ -170,13 +169,5 @@ public class MedicoDAO {
         return tableModel;
 
     }
- 
-
-
-
-
-
-
-
 
 }

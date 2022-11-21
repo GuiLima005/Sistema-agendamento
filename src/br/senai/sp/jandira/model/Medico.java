@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Medico extends Pessoa {
@@ -11,10 +12,12 @@ public class Medico extends Pessoa {
     private ArrayList<Especialidade> especialidades;
 
     // Métodos de acesso
-    public Medico(Integer codigo, String crm, String nome) {
+    public Medico(Integer codigo, String crm, String nome, String email, String telefone) {
         this.codigo = codigo;
         this.crm = crm;
         this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
         this.contador = this.codigo;
     }
 
@@ -69,7 +72,7 @@ public class Medico extends Pessoa {
     }
 
     public String getMedicoSeperadoPorPontoEVirgula() {
-        String medicoStr = this.codigo + ";" + this.getCrm() + ";" + this.getNome();
+        String medicoStr = this.codigo + ";" + this.getCrm() + ";" + this.getNome() + ";" + this.getTelefone() + ";" + this.getEmail() ;
         return medicoStr;
     }
 
