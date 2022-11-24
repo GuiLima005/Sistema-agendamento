@@ -11,7 +11,7 @@ public class Medico extends Pessoa {
     private static int quantidade;
     private ArrayList<Especialidade> especialidades;
 
-    // Métodos de acesso
+    
     public Medico(Integer codigo, String crm, String nome, String email, String telefone) {
         this.codigo = codigo;
         this.crm = crm;
@@ -72,7 +72,7 @@ public class Medico extends Pessoa {
     }
 
     public String getMedicoSeperadoPorPontoEVirgula() {
-        String medicoStr = this.codigo + ";" + this.getCrm() + ";" + this.getNome() + ";" + this.getTelefone() + ";" + this.getEmail() ;
+        String medicoStr = this.codigo + ";" + this.getCrm() + ";" + this.getNome() + ";" + this.getEmail() + ";" + this.getTelefone() + ";" + this.getDataNascimento() + ";" + getEspecialidades();
         return medicoStr;
     }
 

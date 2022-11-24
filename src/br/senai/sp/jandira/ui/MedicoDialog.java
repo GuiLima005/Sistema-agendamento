@@ -10,12 +10,13 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 public class MedicoDialog extends javax.swing.JDialog {
-    
+
     private TipoOperacao tipoOperacao;
     private Medico medico;
-
+    
     public MedicoDialog(java.awt.Frame parent, boolean modal, TipoOperacao tipoOperacao, Medico medico) {
         super(parent, modal);
+
         initComponents();
         this.tipoOperacao = tipoOperacao;
         this.medico = medico;
@@ -34,6 +35,7 @@ public class MedicoDialog extends javax.swing.JDialog {
         textEmail.setText(medico.getEmail());
         textTelefone.setText(medico.getTelefone());
         
+
     }
 
     @SuppressWarnings("unchecked")
@@ -256,7 +258,6 @@ public class MedicoDialog extends javax.swing.JDialog {
                                         .addComponent(textCrm, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(66, 66, 66))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel2)
                                         .addGap(146, 146, 146)))
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -394,17 +395,16 @@ public class MedicoDialog extends javax.swing.JDialog {
             gravar();
         } else {
             atualizar();
-       }
+        }
     }//GEN-LAST:event_buttonAdicionarActionPerformed
     private void textCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCodigoActionPerformed
     }//GEN-LAST:event_textCodigoActionPerformed
-     private void atualizar() {
+    private void atualizar() {
         medico.setNome(textNomeMedico.getText());
         medico.setCrm(textCrm.getText());
         medico.setEmail(textEmail.getText());
         medico.setTelefone(textTelefone.getText());
 //        medico.setDataNascimento();
-        
 
         if (validarCadastro()) {
             MedicoDAO.atualizar(medico);
@@ -412,18 +412,15 @@ public class MedicoDialog extends javax.swing.JDialog {
             dispose();
         }
     }
-     
-     private void gravar() {
 
-        
+    private void gravar() {
+
         Medico medico = new Medico();
         medico.setNome(textNomeMedico.getText());
         medico.setCrm(textCrm.getText());
         medico.setEmail(textEmail.getText());
         medico.setTelefone(textTelefone.getText());
 //        medico.setDataNascimento
-        
-        
 
         if (validarCadastro()) {
             MedicoDAO.gravar(medico);
@@ -432,8 +429,8 @@ public class MedicoDialog extends javax.swing.JDialog {
             dispose();
         }
     }
-     
-     private boolean validarCadastro() {
+
+    private boolean validarCadastro() {
         if (textNomeMedico.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor preencha o nome do médico", "Aviso", JOptionPane.ERROR_MESSAGE);
 
@@ -462,18 +459,17 @@ public class MedicoDialog extends javax.swing.JDialog {
 
             return false;
         }
-         if (textTelefone.getText().isEmpty()) {
+        if (textTelefone.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor preecha o telefone do médico", "Aviso", JOptionPane.ERROR_MESSAGE);
 
             textTelefone.requestFocus();
 
             return false;
         }
-        
+
         return true;
     }
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Label;

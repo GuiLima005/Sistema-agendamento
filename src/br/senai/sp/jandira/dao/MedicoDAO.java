@@ -127,7 +127,8 @@ public class MedicoDAO {
 
             while (linha != null && !linha.isEmpty()) {
                 String[] linhaVetor = linha.split(";");
-                Medico novoMedico = new Medico(Integer.valueOf(linhaVetor[0]), linhaVetor[1], linhaVetor[2], linhaVetor[3], linhaVetor[4]);
+                Medico novoMedico;
+                novoMedico = new Medico(Integer.valueOf(linhaVetor[0]), linhaVetor[1], linhaVetor[2], linhaVetor[3], linhaVetor[4]);
                 medicos.add(novoMedico);
                 linha = br.readLine();
             }
