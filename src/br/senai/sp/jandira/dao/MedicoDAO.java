@@ -9,7 +9,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.text.DateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -123,7 +127,6 @@ public class MedicoDAO {
             BufferedReader br = Files.newBufferedReader(PATH);
 
             String linha = br.readLine();
-            
 
             while (linha != null && !linha.isEmpty()) {
                 String[] linhaVetor = linha.split(";");

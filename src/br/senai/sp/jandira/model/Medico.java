@@ -18,6 +18,7 @@ public class Medico extends Pessoa {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
+        //this.dataNascimento = dataNascimento;
         this.contador = this.codigo;
     }
 

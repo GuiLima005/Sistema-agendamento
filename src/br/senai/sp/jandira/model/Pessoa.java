@@ -1,6 +1,9 @@
 package br.senai.sp.jandira.model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Pessoa {
 
@@ -40,5 +43,10 @@ public class Pessoa {
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
-
+    
+    public void dataNascimentoParaString() {
+        
+    }
+    
+    
 }
