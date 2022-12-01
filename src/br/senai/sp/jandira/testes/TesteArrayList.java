@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.testes;
 
+import br.senai.sp.jandira.dao.EspecialidadeDAO;
 import java.util.ArrayList;
 
 import br.senai.sp.jandira.dao.PlanoDeSaudeDAO;
@@ -129,7 +130,8 @@ public class TesteArrayList {
 //		
 //		System.out.println(dao.listarTodos());
 //		 PlanoDeSaude plano1 = new PlanoDeSaude("Amil", "Basic");
-//		
+
+		
     }
 
 }
