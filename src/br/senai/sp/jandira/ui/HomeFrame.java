@@ -20,7 +20,7 @@ public class HomeFrame extends javax.swing.JFrame {
         initComponents();
         PlanoDeSaudeDAO.getListaPlanosDeSaude();
         EspecialidadeDAO.getEspecialidade();
-        MedicoDAO.getMedico();
+        MedicoDAO.getListaMedicos();
         initPanels();
 
     }
@@ -189,7 +189,8 @@ public class HomeFrame extends javax.swing.JFrame {
         setBounds(0, 0, 998, 699);
     }// </editor-fold>//GEN-END:initComponents
     private void buttonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSairActionPerformed
-
+    dispose();
+        
     }//GEN-LAST:event_buttonSairActionPerformed
     private void buttonAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgendaActionPerformed
 

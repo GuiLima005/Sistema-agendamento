@@ -10,7 +10,6 @@ public class Medico extends Pessoa {
     private String crm;
     private static int quantidade;
     private ArrayList<Especialidade> especialidades;
-
     
     public Medico(Integer codigo, String crm, String nome, String email, String telefone) {
         this.codigo = codigo;
@@ -18,7 +17,6 @@ public class Medico extends Pessoa {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
-        //this.dataNascimento = dataNascimento;
         this.contador = this.codigo;
     }
 
@@ -76,5 +74,10 @@ public class Medico extends Pessoa {
         String medicoStr = this.codigo + ";" + this.getCrm() + ";" + this.getNome() + ";" + this.getEmail() + ";" + this.getTelefone() + ";" + this.getDataNascimento() + ";" + getEspecialidades();
         return medicoStr;
     }
+
+    private void setDataDeNascimento(LocalDate dataDeNascimento) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
 
 }

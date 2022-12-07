@@ -7,16 +7,23 @@ import br.senai.sp.jandira.model.Medico;
 import br.senai.sp.jandira.model.TipoOperacao;
 import java.awt.Label;
 import java.awt.List;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 public class MedicoDialog extends javax.swing.JDialog {
 
-    private DefaultListModel<String> listaEspecialidadesModel = new DefaultListModel<>();
-    private DefaultListModel<String> especialidadesMedicoModel = new DefaultListModel<>();
-    private ArrayList<String> especialidadesMedico = new ArrayList<>();
+     private DefaultListModel<String> listaTodosModel = new DefaultListModel<>();
+    private ArrayList<String> especialidades = new ArrayList<>();
+    private ArrayList<Especialidade> EspecialidadesNaoSelecionados = EspecialidadeDAO.listarTodos();
+    
+    private DefaultListModel<String> listaDasEspecialidadesMedico = new DefaultListModel<>();
+    private ArrayList<String> selecionados = new ArrayList<>();
+    private ArrayList<Especialidade> selecionadosModel = new ArrayList<>();
 
     private TipoOperacao tipoOperacao;
     private Medico medico;
@@ -63,7 +70,6 @@ public class MedicoDialog extends javax.swing.JDialog {
         textNomeMedico = new javax.swing.JTextField();
         textCrm = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        textDataNascimento = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         textTelefone = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -78,6 +84,7 @@ public class MedicoDialog extends javax.swing.JDialog {
         listEspecialidades = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         listMedico = new javax.swing.JList<>();
+        textDataNascimento = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -172,12 +179,6 @@ public class MedicoDialog extends javax.swing.JDialog {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setText("Data Nascimento:");
 
-        textDataNascimento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textDataNascimentoActionPerformed(evt);
-            }
-        });
-
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Telefone:");
 
@@ -202,7 +203,7 @@ public class MedicoDialog extends javax.swing.JDialog {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setText("Lista de especialidades:");
 
-        buttonVoltarEspecialidade.setBackground(new java.awt.Color(246, 246, 246));
+        buttonVoltarEspecialidade.setBackground(new java.awt.Color(255, 0, 0));
         buttonVoltarEspecialidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/seta-es-32.png"))); // NOI18N
         buttonVoltarEspecialidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,7 +211,7 @@ public class MedicoDialog extends javax.swing.JDialog {
             }
         });
 
-        buttonAdicionarEspecialidade.setBackground(new java.awt.Color(246, 246, 246));
+        buttonAdicionarEspecialidade.setBackground(new java.awt.Color(51, 255, 0));
         buttonAdicionarEspecialidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/seta-di-32.png"))); // NOI18N
         buttonAdicionarEspecialidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,26 +249,6 @@ public class MedicoDialog extends javax.swing.JDialog {
                 .addGap(33, 33, 33)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(textCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(35, 35, 35)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(48, 48, 48)
-                                        .addComponent(textCrm, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(66, 66, 66))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(146, 146, 146)))
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(textNomeMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(Label))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel11)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,11 +258,30 @@ public class MedicoDialog extends javax.swing.JDialog {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                        .addGap(46, 46, 46)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(textDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(147, 147, 147))))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(textDataNascimento)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(textCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(48, 48, 48)
+                                .addComponent(textCrm, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(66, 66, 66))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(146, 146, 146)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(textNomeMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(Label))
+                .addGap(127, 127, 127))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -381,26 +381,41 @@ public class MedicoDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_textNomeMedicoActionPerformed
     private void textCrmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCrmActionPerformed
     }//GEN-LAST:event_textCrmActionPerformed
-    private void textDataNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDataNascimentoActionPerformed
-    }//GEN-LAST:event_textDataNascimentoActionPerformed
     private void textTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTelefoneActionPerformed
     }//GEN-LAST:event_textTelefoneActionPerformed
     private void textEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textEmailActionPerformed
     }//GEN-LAST:event_textEmailActionPerformed
     private void buttonAdicionarEspecialidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarEspecialidadeActionPerformed
 
-        var especialidades = listEspecialidades.getSelectedValuesList();
+         var especialidadesMedico = listEspecialidades.getSelectedValuesList();
 
-        especialidadesMedicoModel.clear();
-        for (String percorrer : especialidades) {
-            especialidadesMedico.add(percorrer);
+        for (String e : especialidadesMedico){
+            selecionados.add(e);
         }
-        especialidadesMedicoModel.clear();
-        especialidadesMedicoModel.addAll(especialidadesMedico);
-        listMedico.setModel(especialidadesMedicoModel);
 
+        for(Especialidade e : EspecialidadesNaoSelecionados){
+            if(especialidadesMedico.contains(e.getNome())){
+                selecionadosModel.add(e);
+                
+            }
+        }
+        
+        
+
+        listaDasEspecialidadesMedico.clear();
+        listaDasEspecialidadesMedico.addAll(selecionados);
+        listMedico.setModel(listaDasEspecialidadesMedico);
+
+         var excluir = listEspecialidades.getSelectedValuesList();
+        
+        
+        for(String e : excluir){
+            listaTodosModel.removeElement(e);
+            especialidades.remove(e);
+        }
     }//GEN-LAST:event_buttonAdicionarEspecialidadeActionPerformed
     private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
+        dispose();
     }//GEN-LAST:event_buttonCancelarActionPerformed
     private void buttonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarActionPerformed
 
@@ -415,16 +430,33 @@ public class MedicoDialog extends javax.swing.JDialog {
 
     private void buttonVoltarEspecialidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVoltarEspecialidadeActionPerformed
 
-        especialidadesMedicoModel.clear();
-        especialidadesMedicoModel.removeElement(especialidadesMedico);
+         var removerEspecialidadesDoMedico = listMedico.getSelectedValuesList();
 
+        for(String e : removerEspecialidadesDoMedico){
+            especialidades.add(e);
+        }
+        for(Especialidade e : EspecialidadesNaoSelecionados){
+            if(removerEspecialidadesDoMedico.contains(e.getNome())){
+                selecionadosModel.remove(e);
+            }
+        }
+
+        listaTodosModel.addAll(especialidades);
+        listEspecialidades.setModel(listaTodosModel);
+
+         var excluir = listMedico.getSelectedValuesList();
+        
+        for(String e : excluir){
+            listaDasEspecialidadesMedico.removeElement(e);
+            selecionados.remove(e);
+        }
     }//GEN-LAST:event_buttonVoltarEspecialidadeActionPerformed
     private void atualizar() {
         medico.setNome(textNomeMedico.getText());
         medico.setCrm(textCrm.getText());
         medico.setEmail(textEmail.getText());
         medico.setTelefone(textTelefone.getText());
-//        medico.setDataNascimento();
+        medico.setDataNascimento(dataCorreta());
 
         if (validarCadastro()) {
             MedicoDAO.atualizar(medico);
@@ -440,7 +472,7 @@ public class MedicoDialog extends javax.swing.JDialog {
         medico.setCrm(textCrm.getText());
         medico.setEmail(textEmail.getText());
         medico.setTelefone(textTelefone.getText());
-//        medico.setDataNascimento
+        medico.setDataNascimento(dataCorreta());
 
         if (validarCadastro()) {
             MedicoDAO.gravar(medico);
@@ -493,10 +525,10 @@ public class MedicoDialog extends javax.swing.JDialog {
     private void carregarEspecalidades() {
 
         for (Especialidade percorrer : EspecialidadeDAO.listarTodos()) {
-            listaEspecialidadesModel.addElement(percorrer.getNome());
+            listaTodosModel.addElement(percorrer.getNome());
         }
 
-        listEspecialidades.setModel(listaEspecialidadesModel);
+        listEspecialidades.setModel(listaTodosModel);
 
     }
 
@@ -527,9 +559,29 @@ public class MedicoDialog extends javax.swing.JDialog {
     private javax.swing.JList<String> listMedico;
     private javax.swing.JTextField textCodigo;
     private javax.swing.JTextField textCrm;
-    private javax.swing.JTextField textDataNascimento;
+    private javax.swing.JFormattedTextField textDataNascimento;
     private javax.swing.JTextField textEmail;
     private javax.swing.JTextField textNomeMedico;
     private javax.swing.JTextField textTelefone;
     // End of variables declaration//GEN-END:variables
+
+    private LocalDate dataCorreta() {
+        String[] data = textDataNascimento.getText().split("/");
+    if(validarData()){
+        return LocalDate.of(Integer.parseInt(data[2]), Integer.parseInt(data[1]), Integer.parseInt(data[0]));
+    } return null;
+        
+}
+    private boolean validarData(){
+        String dateFormat = "dd/MM/uuuu";
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(dateFormat).withResolverStyle(ResolverStyle.SMART);
+        
+        try{
+            LocalDate date = LocalDate.parse(textDataNascimento.getText(), dateTimeFormatter);
+            return true;
+        }catch (DateTimeParseException e){
+            return false;
+        }
+    }
+
 }

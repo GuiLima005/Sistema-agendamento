@@ -120,7 +120,7 @@ public class MedicoDAO {
         return medicos;
     }
 
-    public static void getMedico() {
+    public static void getListaMedicos() {
 
         try {
             // Abrir o arquivo para leitura
@@ -128,10 +128,10 @@ public class MedicoDAO {
 
             String linha = br.readLine();
 
+                        
             while (linha != null && !linha.isEmpty()) {
                 String[] linhaVetor = linha.split(";");
-                Medico novoMedico;
-                novoMedico = new Medico(Integer.valueOf(linhaVetor[0]), linhaVetor[1], linhaVetor[2], linhaVetor[3], linhaVetor[4]);
+                Medico novoMedico = new Medico(Integer.valueOf(linhaVetor[0]), linhaVetor[1], linhaVetor[2], linhaVetor[3], linhaVetor[4]);
                 medicos.add(novoMedico);
                 linha = br.readLine();
             }
